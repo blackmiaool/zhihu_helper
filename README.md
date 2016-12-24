@@ -6,6 +6,7 @@
 * 去除外链跳转中转
 * 民主自由标签
 * 隐藏黑名单中用户的评论
+* +1s/-1s
 
 ### chome下安装方法
 * 安装[油猴脚本插件](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
