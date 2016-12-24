@@ -21,8 +21,8 @@ $.fn.on = function (event, event2) {
 };
 (function () {
     'use strict';
-    
-    
+
+
     /*去除版权信息*/
     var concatPre = Array.prototype.concat;
     Array.prototype.concat = function (b) {
@@ -38,7 +38,7 @@ $.fn.on = function (event, event2) {
     };
     /*去除版权信息 end*/
 
-    /*去除外链跳转中转*/
+    /*去除跳转中转*/
     $(document.body).on("mousedown", "a", function (e) {
         var $a = $(this);
         var href = $a.attr("href");
@@ -49,8 +49,8 @@ $.fn.on = function (event, event2) {
             $a.attr("href", href);
         }
     });
-    /*去除外链跳转中转 end*/
-    
+    /*去除跳转中转 end*/
+
     /*民主自由标签*/
     var tipStyle = "color: white;font-size: 22px;display: inline-block;position: absolute;top: 0;bottom: 0;line-height: 22px;margin: auto;height: 22px;";
     $(".zu-top").append($("<span style='" + tipStyle + "left: 10px;" + "'>民主</span>"))
@@ -147,5 +147,34 @@ $.fn.on = function (event, event2) {
         }
     })();
     /*屏蔽黑名单中用户的评论 end*/
-    
+
+    /* +1s/-1s */
+    function avatarFloatingText($avatar,text,color){
+        var delayTime=100;//ms
+        var transitionTime=1000;//ms
+        $avatar.parents(".answer-head").css("position","relative");
+        var $text=$('<div style="    position: absolute;font-size: 20px;color: '+color+';top: -23px;right:-3px;line-height: 20px;transition:all '+transitionTime+'ms;">'+text+'</div>');
+        $avatar.parent().append($text);
+        setTimeout(function(){
+            $text.css("transform","translateY(-10px)");
+            $text.css("opacity","0");
+            setTimeout(function(){
+                $text.remove();
+            },transitionTime+20);
+        },delayTime);
+
+    }
+    $(".zm-votebar").find("button.up,button.down").on("click",function(){
+        var $dom=$(this);
+        if(!$dom.hasClass("pressed"))
+            return;
+        var $avatar=$dom.parents(".zm-item-answer").find(".answer-head .zm-list-avatar");
+        if($dom.hasClass("up")){
+            avatarFloatingText($avatar,"+1s","steelblue");
+        }else if($dom.hasClass("down")){
+            avatarFloatingText($avatar,"-1s","crimson");
+        }
+    });
+    /* +1s/-1s end */
+
 })();
